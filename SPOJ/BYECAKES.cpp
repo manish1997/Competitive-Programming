@@ -1,7 +1,6 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
-#define ll long long
 using namespace std;
 int given[4];
 int reqfor1[4];
