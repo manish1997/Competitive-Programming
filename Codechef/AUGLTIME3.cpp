@@ -20,7 +20,7 @@ bool valid(int i, int j){
 int dx[2];
 int dy[2];
  
-ll helper(int x, int y, int curr){
+ll helper2(int x, int y, int curr){
 	ll &answer=dp[x][y][curr];
 	if(answer!=-1) return answer;
 	answer=0;
@@ -31,7 +31,31 @@ ll helper(int x, int y, int curr){
 				rep(k,0,2){
 					int xx=x+dx[j]*arr[i][0];
 					int yy=y+dy[k]*arr[i][1];
-					if(valid(xx,yy)) answer=max(answer, helper(xx,yy, curr+(1<<i)));
+					if(valid(xx,yy)) answer=max(answer, helper2(xx,yy, curr+(1<<i)));
+				}
+ 
+			}
+ 
+		}
+	}
+	answer=(answer+matrix[x][y]);
+	return answer;
+}
+ll helper(int x, int y, int curr){
+	ll &answer=dp[x][y][curr];
+	if(answer!=-1) return answer;
+	answer=0;
+	rep(i,0,N){
+		if(((1<<i)&curr)){
+ 
+			rep(j,0,2){
+				rep(k,0,2){
+					int xx=x+dx[j]*arr[i][0];
+					int yy=y+dy[k]*arr[i][1];
+					if(valid(xx,yy)) {
+					//	cout << x << " valid " << y << " " << curr << endl;
+						answer=max(answer, helper(xx,yy, curr-(1<<i)));
+					}
 				}
  
 			}
@@ -43,9 +67,6 @@ ll helper(int x, int y, int curr){
 }
 int main(){
 	std::ios::sync_with_stdio(false);
-	ll ans=1;
-	for(int i=4; i<=36; i+=4) ans*=i;
-		cout << ans << endl;
 	int t; si(t);
 	dx[0]=1;
 	dx[1]=-1;
@@ -67,7 +88,7 @@ int main(){
 			cout << 1 << endl;
 			continue;
 		}
-		cout <<helper(sx,sy,0) << endl;
+		cout <<helper(sx,sy,(1<<N)-1) << endl;
 	}
 	return 0;
 } 
