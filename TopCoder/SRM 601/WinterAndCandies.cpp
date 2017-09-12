@@ -12,11 +12,9 @@ class WinterAndCandies {
         mem(arr,0);
         rep(i,0,type.size()) arr[type[i]]++;
         ll ANS=0;
+        ll ans=1;
         rep(i,1,51){
-            ll ans=1;
-            rep(j,1,i+1){
-                ans*=arr[j];
-            }
+            ans*=arr[i];
             ANS+=ans;
         }
         return ANS;
