@@ -1,3 +1,4 @@
+//http://www.math.harvard.edu/~engelwar/MathS305/PolynomialDifferenceTables.pdf
 //#include<bits/stdc++.h>
 #include <iostream>
 #include <cmath>
@@ -12,9 +13,9 @@ using namespace std;
 #define pin(n) printf("%d\n",n)
 #define mem(A,i) memset(A, i, sizeof(A))
 #define plln(n) printf("%lld\n",n)
-#define pis(n) printf("%d ",n)
+#define pis(n) printf("%lld ",n)
 #define plls(n) printf("%lld ",n)
-#define rep(i, start, end) for(int i=start; i<end; i++)
+#define rep(i, start, end) for(ll i=start; i<end; i++)
 #define repDown(i, start, end) for(ll i=start; i>=end; i--)
 #define S second
 #define F first
@@ -24,14 +25,20 @@ using namespace std;
 #define MAX 100005
 #define s second
 #define f first
+#define vi vector<ll>
+#define vll vector<ll>
 #define newLine printf("\n")
+#define pb push_back
+
+vector<vi> V;
+ll n, r;
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
 }
 string inputString(){
     string i="";
-    int temp=getchar();
+    ll temp=getchar();
     while(temp<'a'||temp>'z')
         temp=getchar();
     while(temp>='a'&&temp<='z')
@@ -58,13 +65,44 @@ long long add(long long &x, long long y){
 }
 void reset(){
     //check if your logic is correct but still wrong answer
+    V.clear();
 
 }
 void solve(){
     reset();
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    sll(n); sll(r);
+    vi temp(n);
+    rep(i,0,n) sll(temp[i]);
+    V.pb(temp);
+    ll i=0;
+    while(1){
+        temp.clear();
+        bool eq=true;
+        ll base=V[i][0];
+        rep(j,1,V[i].size()){
+            if(base!=V[i][j]){
+                eq=false;
+            }
+            temp.push_back(V[i][j]-V[i][j-1]);
+        }
+        if(eq) break;
+        V.pb(temp);
+        i++;
+    }
+    rep(j,0,r) V[i].pb(V[i][0]);
+    i--;
+    while(i>=0){
+        ll len=V[i].size();
+        rep(j,1,len+r){
+            ll ans=V[i+1][j-1]+V[i][j-1];
+            if(j<len) V[i][j]=ans;
+            else V[i].pb(ans);
+        }
+        i--;
+    }
+    rep(j,n,V[0].size()) pis(V[0][j]);
+    newLine;
 }
 
 int main(){
