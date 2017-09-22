@@ -1,3 +1,4 @@
+//LONGEST PATH IN A UNDIRECTED TREE
 //#include<bits/stdc++.h>
 #include <iostream>
 #include <cmath>
@@ -17,6 +18,8 @@ using namespace std;
 #define plls(n) printf("%lld ",n)
 #define rep(i, start, end) for(int i=start; i<end; i++)
 #define repDown(i, start, end) for(ll i=start; i>=end; i--)
+#define S second
+#define F first
 #define P pair<ll,ll>
 #define PP pair<P,ll>
 #define mod 1000000007
@@ -55,15 +58,42 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+int n;
+vector<pair<int,int> > adj[50005];
+int maxx,far;
 void reset(){
     //check if your logic is correct but still wrong answer
+    rep(i,0,n+1) adj[i].clear();
+
 
 }
+void dfs(int node, int parent, int cost){
+    if(maxx<cost){
+        maxx=cost;
+        far=node;
+    }
+    rep(i,0,adj[node].size()){
+        if(adj[node][i].first==parent) continue;
+        dfs(adj[node][i].first, node, cost+adj[node][i].second);
+    }
+    return;
+}
 void solve(){
-    reset();
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    si(n);
+    reset();
+    rep(i,0,n-1){
+        int a,b,c;
+        si(a); si(b); si(c);
+        a--;b--;
+        adj[a].push_back({b,c});
+        adj[b].push_back({a,c});
+    }
+    far=maxx=0;
+    dfs(0,-1,0);
+    maxx=0;
+    dfs(far,-1,0);
+    pin(maxx);
 }
 
 int main(){

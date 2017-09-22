@@ -55,15 +55,24 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+ll dp[4][100100],n,arr[100100];
 void reset(){
     //check if your logic is correct but still wrong answer
-
+    mem(dp,0);
+    mem(arr,0);
 }
 void solve(){
     reset();
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    sll(n);
+    rep(i,0,n) sll(arr[i]);
+    repDown(i,n-1,0){
+        dp[1][i]=arr[i]+dp[0][i+2];
+        dp[2][i]=arr[i]+arr[i+1]+dp[0][i+4];
+        dp[3][i]=arr[i]+arr[i+1]+arr[i+2]+dp[0][i+6];
+        dp[0][i]=max(dp[1][i],max(dp[2][i], dp[3][i]));
+    }
+    plln(dp[0][0]);    
 }
 
 int main(){
