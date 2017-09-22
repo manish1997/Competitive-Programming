@@ -65,16 +65,31 @@ void reset(){
     //check if your logic is correct but still wrong answer
 
 }
+char s[1005];
 void solve(){
     reset();
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    int n=strlen(s);
+    int ans=0,k=0;
+    int flip=0;
+    while(k<n){
+        if((s[k]=='1' && flip==0) || (s[k]=='0' && flip==1)) {
+            ans++;
+            flip^=1;
+        }
+        k++;
+    }
+    pin(ans);  
 }
 
 int main(){
-    int t; si(t);
-    while(t--){
+    //int t; si(t);
+    float ans=0;
+    rep(i,1,1+1e6) ans+=sqrt((float)i);//+sqrt((i*(i+1))/2.0);
+    cout << ans << endl;
+    int t=0;
+    while(scanf("%s",s)!=EOF){
+        printf("Game #%d: ", ++t);
         solve();
     }
     return 0;
