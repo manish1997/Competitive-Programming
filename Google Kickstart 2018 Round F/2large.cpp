@@ -1,4 +1,4 @@
-//#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <iostream>
 #include <cmath>
 #include <climits>
@@ -10,10 +10,10 @@ using namespace std;
 #define ll long long
 #define si(n) scanf("%d",&n)
 #define si2(n1,n2) scanf("%d%d",&n1,&n2)
-#define si3(n1,n2,n3) scanf("%d%d%d",&n,&n2,&n3)
+#define si3(n1,n2,n3) scanf("%d%d%d",&n,&n2.&n3)
 #define sll(n) scanf("%lld",&n)
 #define sll2(n1,n2) scanf("%lld%lld",&n1,&n2)
-#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n,&n2,&n3)
+#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n,&n2.&n3)
 #define pin(n) printf("%d\n",n)
 #define mem(A,i) memset(A, i, sizeof(A))
 #define plln(n) printf("%lld\n",n)
@@ -65,16 +65,44 @@ void reset(){
     //check if your logic is correct but still wrong answer
 
 }
+void helper(vector<ll> A, ll E, ll H, ll &ans){
+    ans=max(ans,H);
+    if(A.size()<=0) return;
+    ll a=INT_MAX; ll b=INT_MIN;
+    rep(i,0,A.size()){
+        a=min(a,A[i]); b=max(b,A[i]);
+    }
+    auto itmin=find(A.begin(), A.end(), a);
+    auto itmax=find(A.begin(), A.end(), b);
+    if(E>a){
+        A.erase(itmin);
+        helper(A,E-a, H+1, ans);
+    }
+    else{
+        if(H>0) {
+            A.erase(itmax); 
+            helper(A,E+b, H-1, ans);
+        }
+    }
+}
 void solve(){
     reset();
     //solve the problem. You can and you will :) give your best shot..
-
+    ll E,N; sll2(E,N);
+    vector<ll> temp(N);
+    rep(i,0,N) sll(temp[i]);
+    ll ans=0;
+    helper(temp, E, 0, ans);
+    plln(ans);
     
+
 }
 
 int main(){
     int t; si(t);
+    int x=1;
     while(t--){
+        printf("Case #%d: ", x++);
         solve();
     }
     return 0;
