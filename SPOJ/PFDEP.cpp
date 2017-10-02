@@ -4,16 +4,16 @@
 #include <climits>
 #include <cstring>
 #include <vector>
-#include <map>
+#include <queue>
 using namespace std;
 #define pi 3.1415926535897
 #define ll long long
 #define si(n) scanf("%d",&n)
 #define si2(n1,n2) scanf("%d%d",&n1,&n2)
-#define si3(n1,n2,n3) scanf("%d%d%d",&n1,&n2,&n3)
+#define si3(n1,n2,n3) scanf("%d%d%d",&n,&n2,&n3)
 #define sll(n) scanf("%lld",&n)
 #define sll2(n1,n2) scanf("%lld%lld",&n1,&n2)
-#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n1,&n2,&n3)
+#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n,&n2,&n3)
 #define pin(n) printf("%d\n",n)
 #define mem(A,i) memset(A, i, sizeof(A))
 #define plln(n) printf("%lld\n",n)
@@ -29,23 +29,7 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
 
-//Sieve Start
-vector<int> Prime;
-void sieve(){
-	bool neverMakeThisName[sieveMax];
-    neverMakeThisName[0]=neverMakeThisName[1]=true;
-    for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
-
-    for(int i=3; i<=sqrt(sieveMax); i+=2)
-        if(neverMakeThisName[i]==false) {
-            for(int j=i*i; j<sieveMax; j+=i) neverMakeThisName[j]=true;
-        }
-
-    rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
-}
-//Sieve End
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -77,14 +61,45 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
-void solve(){
-    //solve the problem. You can and you will :) give your best shot..
+void reset(){
+    //check if your logic is correct but still wrong answer
 
-    
+}
+int n;
+vector<int> adj[102];
+int deg[102];
+
+void solve(){
+    reset();
+    //solve the problem. You can and you will :) give your best shot..
+    int m;
+    mem(deg,0);
+    si2(n,m);
+    rep(i,0,m){
+        int c; si(c);
+        int k; si(k);
+        rep(j,0,k){
+            int p; si(p);
+            adj[p].push_back(c);
+            deg[c]++;
+        }
+    }
+    priority_queue<int> PQ;
+    rep(i,1,n+1) if(deg[i]==0) PQ.push(-i);
+    while(!PQ.empty()){
+        int curr=-PQ.top();
+        PQ.pop();
+        printf("%d ", curr);
+        rep(i,0,adj[curr].size()) {
+            deg[adj[curr][i]]--;
+            if(!deg[adj[curr][i]]) PQ.push(-adj[curr][i]);
+        }
+    }
+
 }
 
 int main(){
-    int t=1; si(t);
+    int t=1;// si(t);
     while(t--){
         solve();
     }

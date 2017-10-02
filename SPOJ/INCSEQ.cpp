@@ -24,17 +24,16 @@ using namespace std;
 #define P pair<ll,ll>
 #define PP pair<P,ll>
 #define mod 1000000007
-#define MAX 100005
 #define s second
 #define f first
 #define newLine printf("\n")
 #define pb push_back
 #define sieveMax 10000001 //maximum for which u need primality test
-
-//Sieve Start
+bool neverMakeThisName[sieveMax];
 vector<int> Prime;
+
+
 void sieve(){
-	bool neverMakeThisName[sieveMax];
     neverMakeThisName[0]=neverMakeThisName[1]=true;
     for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
 
@@ -45,7 +44,7 @@ void sieve(){
 
     rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
 }
-//Sieve End
+
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -71,20 +70,56 @@ ll expo(ll x, ll n, ll m){
 	return temp;
 }
 
-long long add(long long &x, long long y){
+int add(int &x, int y){
         x=x+y;
-        x%=mod;
-        if(x<0) x+=mod;
+        x%=5000000;
+        if(x<0) x+=5000000;
         return x;
+}
+
+#define MAX 10005
+int n,k;
+int arr[MAX];
+int dp[MAX];
+int BIT[52][10*MAX];
+int maxx;
+void update(int num, int idx, int val){
+    while(idx<=maxx) {
+        add(BIT[num][idx],val);
+        idx+=(idx&-idx);
+    }
+}
+int query(int num, int idx){
+    int res=0;
+    while(idx>0){
+        add(res,BIT[num][idx]);
+        idx-=(idx&-idx);
+    }
+    return res;
 }
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    si(n); si(k);
+    maxx=-1;
+    rep(i,0,n) {
+        si(arr[i]);
+        arr[i]++;
+        dp[i]=1;
+        maxx=max(maxx,arr[i]);
+    }
+    rep(i,2,k+1){
+        rep(j,0,n){
+            update(i, arr[j],dp[j]);
+            dp[j]=query(i, arr[j]-1);
+        }
+    }
+    int ans=0;
+    rep(i,0,n) add(ans,dp[i]);
+    pin(ans);
 }
 
 int main(){
-    int t=1; si(t);
+    int t=1;// si(t);
     while(t--){
         solve();
     }

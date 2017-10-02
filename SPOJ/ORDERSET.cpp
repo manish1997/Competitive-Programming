@@ -10,10 +10,10 @@ using namespace std;
 #define ll long long
 #define si(n) scanf("%d",&n)
 #define si2(n1,n2) scanf("%d%d",&n1,&n2)
-#define si3(n1,n2,n3) scanf("%d%d%d",&n1,&n2,&n3)
+#define si3(n1,n2,n3) scanf("%d%d%d",&n,&n2,&n3)
 #define sll(n) scanf("%lld",&n)
 #define sll2(n1,n2) scanf("%lld%lld",&n1,&n2)
-#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n1,&n2,&n3)
+#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n,&n2,&n3)
 #define pin(n) printf("%d\n",n)
 #define mem(A,i) memset(A, i, sizeof(A))
 #define plln(n) printf("%lld\n",n)
@@ -29,23 +29,7 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
 
-//Sieve Start
-vector<int> Prime;
-void sieve(){
-	bool neverMakeThisName[sieveMax];
-    neverMakeThisName[0]=neverMakeThisName[1]=true;
-    for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
-
-    for(int i=3; i<=sqrt(sieveMax); i+=2)
-        if(neverMakeThisName[i]==false) {
-            for(int j=i*i; j<sieveMax; j+=i) neverMakeThisName[j]=true;
-        }
-
-    rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
-}
-//Sieve End
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -77,9 +61,41 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
-void solve(){
-    //solve the problem. You can and you will :) give your best shot..
+struct node{
+    int val;
+    int r,l;
+    node* right;
+    node* left;
+    node* par;
+    node(int vall,int rr,int xx): val(vall), r(rr), l(xx), par(NULL),right(NULL), left(NULL){}
+};
+void reset(){
+    //check if your logic is correct but still wrong answer
 
+}
+
+void ins(int a, node* root, node* parent){
+    if(root==NULL || root.val==a) {
+        if(!root) root=new node(a,0,0);
+        return;
+    }
+    if(root.val>a) ins(a,root->left, root);
+    else ins(a,root->right, root);
+
+}
+void solve(){
+    reset();
+    //solve the problem. You can and you will :) give your best shot..
+    node* root=NULL;
+    int q; si(q);
+    while(q--){
+        char ch; cin >> ch;
+        int t; si(t);
+        if(ch=='I') ins(t, NULL);
+        else if(ch=='D') del(t);
+        else if(ch=='K') kth(t);
+        else coun(t);
+    }
     
 }
 

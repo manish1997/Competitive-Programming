@@ -29,12 +29,12 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
-
-//Sieve Start
+#define sieveMax 40000001
+bool neverMakeThisName[sieveMax];
 vector<int> Prime;
+
+
 void sieve(){
-	bool neverMakeThisName[sieveMax];
     neverMakeThisName[0]=neverMakeThisName[1]=true;
     for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
 
@@ -45,7 +45,7 @@ void sieve(){
 
     rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
 }
-//Sieve End
+
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -77,15 +77,32 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+ll n;
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    ll roo=sqrt(n);
+    bool first=true;
+    rep(i,0,Prime.size()){
+        if(Prime[i]>roo) break;
+        int cnt=0;
+        while(n>1 && (n%Prime[i])==0){
+            cnt++;
+            n/=Prime[i];
+        }
+        if(cnt) {
+            printf("%d^%d ", Prime[i], cnt);
+        }
+    }
+    if(n>1) {
+        printf("%lld^%d", n, 1);
+    }
+    newLine;
 }
 
 int main(){
-    int t=1; si(t);
-    while(t--){
+    sieve();
+    while(sll(n)){
+        if(!n) break;
         solve();
     }
     return 0;

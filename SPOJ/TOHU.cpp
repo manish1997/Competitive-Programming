@@ -1,4 +1,4 @@
-//#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <iostream>
 #include <cmath>
 #include <climits>
@@ -10,16 +10,16 @@ using namespace std;
 #define ll long long
 #define si(n) scanf("%d",&n)
 #define si2(n1,n2) scanf("%d%d",&n1,&n2)
-#define si3(n1,n2,n3) scanf("%d%d%d",&n1,&n2,&n3)
+#define si3(n1,n2,n3) scanf("%d%d%d",&n,&n2,&n3)
 #define sll(n) scanf("%lld",&n)
 #define sll2(n1,n2) scanf("%lld%lld",&n1,&n2)
-#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n1,&n2,&n3)
+#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n,&n2,&n3)
 #define pin(n) printf("%d\n",n)
 #define mem(A,i) memset(A, i, sizeof(A))
 #define plln(n) printf("%lld\n",n)
 #define pis(n) printf("%d ",n)
 #define plls(n) printf("%lld ",n)
-#define rep(i, start, end) for(int i=start; i<end; i++)
+#define rep(i, start, end) for(double i=start; i<end; i++)
 #define repDown(i, start, end) for(ll i=start; i>=end; i--)
 #define P pair<ll,ll>
 #define PP pair<P,ll>
@@ -29,23 +29,7 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
 
-//Sieve Start
-vector<int> Prime;
-void sieve(){
-	bool neverMakeThisName[sieveMax];
-    neverMakeThisName[0]=neverMakeThisName[1]=true;
-    for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
-
-    for(int i=3; i<=sqrt(sieveMax); i+=2)
-        if(neverMakeThisName[i]==false) {
-            for(int j=i*i; j<sieveMax; j+=i) neverMakeThisName[j]=true;
-        }
-
-    rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
-}
-//Sieve End
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -77,10 +61,20 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+double ans[1000001];
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
 
-    
+    //Idea: Telescopic Series
+    //ak= ((k+1/k+2)-(k/k+1))/k
+    //for k>=2 : summation(ak)= a1 + summation [(1/2)*(((1/k) - (1/k+1)) - ((1/k+1)-(1/k+2)))];
+    //for k>=2 : summation(ak)= a1 + (1/2)*((1/6) - (1/((n+1)*(n+2))));
+    // for k=1, a1=2/3
+    double n; scanf("%lf",&n);
+    double tt;
+    tt=2/3.0;
+    tt+=(0.5*((1/6.0)-(1/((n+1)*(n+2)))));
+    printf("%.11f\n",tt);
 }
 
 int main(){

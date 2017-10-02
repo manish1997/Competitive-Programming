@@ -3,8 +3,8 @@
 #include <cmath>
 #include <climits>
 #include <cstring>
-#include <vector>
-#include <map>
+#include <queue>
+#include <algorithm>
 using namespace std;
 #define pi 3.1415926535897
 #define ll long long
@@ -29,23 +29,7 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
 
-//Sieve Start
-vector<int> Prime;
-void sieve(){
-	bool neverMakeThisName[sieveMax];
-    neverMakeThisName[0]=neverMakeThisName[1]=true;
-    for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
-
-    for(int i=3; i<=sqrt(sieveMax); i+=2)
-        if(neverMakeThisName[i]==false) {
-            for(int j=i*i; j<sieveMax; j+=i) neverMakeThisName[j]=true;
-        }
-
-    rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
-}
-//Sieve End
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -77,14 +61,63 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
-void solve(){
-    //solve the problem. You can and you will :) give your best shot..
+int n;
+int ans[200002];
+int BIT[30005];
+pair<int,int> arr[30001];
 
-    
+void update(int idx){
+    while(idx<=n){
+        BIT[idx]+=1;
+        idx+=(idx&-idx);
+    }
+}
+int query2(int idx){
+    int answer=0;
+    while(idx>0){
+        answer+=BIT[idx];
+        idx-=(idx&-idx);
+    }
+    return answer;
+}
+
+
+struct query{
+    int l,r,k,ind;
+} Q[200002];
+
+bool comp(query A, query B){
+    return A.k>B.k;
+}
+
+
+void solve(){
+    //solve the problem. You can and you will :) give your best shot
+    si(n);
+    rep(i,1,n+1){
+        si(arr[i].f);
+        arr[i].s=i;
+    }
+    sort(arr+1, arr+1+n);
+    int q; si(q);
+    rep(i,0,q){
+        si3(Q[i].l, Q[i].r, Q[i].k);
+        Q[i].ind=i;
+    }
+    sort(Q,Q+q,comp);
+    int endptr=n;
+    rep(i,0,q){
+        while(endptr>0 && arr[endptr].f>Q[i].k){
+            update(arr[endptr].s);
+            endptr--;
+        }
+        ans[Q[i].ind]=query2(Q[i].r)-query2(Q[i].l-1);
+    }
+    rep(i,0,q) pin(ans[i]);
 }
 
 int main(){
-    int t=1; si(t);
+    int t=1; // si(t);
     while(t--){
         solve();
     }

@@ -1,4 +1,4 @@
-//#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <iostream>
 #include <cmath>
 #include <climits>
@@ -29,23 +29,7 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
 
-//Sieve Start
-vector<int> Prime;
-void sieve(){
-	bool neverMakeThisName[sieveMax];
-    neverMakeThisName[0]=neverMakeThisName[1]=true;
-    for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
-
-    for(int i=3; i<=sqrt(sieveMax); i+=2)
-        if(neverMakeThisName[i]==false) {
-            for(int j=i*i; j<sieveMax; j+=i) neverMakeThisName[j]=true;
-        }
-
-    rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
-}
-//Sieve End
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -77,15 +61,37 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+int n;
+int arr[1001][1001];
+int k;
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    rep(i,0,n) rep(j,0,n) si(arr[i][j]);
+    int ans2=0;
+    int ans1=0;
+    rep(i,0,n){
+        int inflow=0;
+        int outflow=0;
+        rep(j,0,n) {
+            inflow+=arr[i][j];
+            outflow+=arr[j][i];
+        }
+        // if(inflow<outflow) ans2+=(outflow-inflow); 
+        //both above and bottom lines will work
+        //until unless one is commented ofc :P
+        if(inflow>outflow) ans2+=(inflow-outflow);
+        ans1+=(inflow+outflow);
+    }
+    printf("%d. ", k);
+    pis(ans1/2);
+    pin(ans2);   
 }
 
 int main(){
-    int t=1; si(t);
-    while(t--){
+    k=0;
+    while(1){
+        k++;
+        si(n); if(!n) break;
         solve();
     }
     return 0;

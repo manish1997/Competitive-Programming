@@ -29,23 +29,52 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
 
-//Sieve Start
+//Start Segmented Sieve of Eras^%&*sac
 vector<int> Prime;
-void sieve(){
-	bool neverMakeThisName[sieveMax];
-    neverMakeThisName[0]=neverMakeThisName[1]=true;
-    for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
-
-    for(int i=3; i<=sqrt(sieveMax); i+=2)
-        if(neverMakeThisName[i]==false) {
-            for(int j=i*i; j<sieveMax; j+=i) neverMakeThisName[j]=true;
+void segmentedSieve(){
+    #define segMax 100000000 //till point you want to find Primes
+    #define rootSegMax 10000 //root of segMax
+    #define maxPrimes 5000000 // define it as INT_MAX if you
+    //don't want to add any limit and only wants to find all Primes
+    bool neverMakeThisName[rootSegMax];
+    mem(neverMakeThisName,true);
+    for(int i=2; i*i<=rootSegMax; i++){
+        if(neverMakeThisName[i]==true) {
+            for(int j=i*i; j<rootSegMax; j+=i){
+                neverMakeThisName[j]=false;
+            }
         }
+    }
+    rep(i,2,rootSegMax) {
+        if(neverMakeThisName[i]) {
+            Prime.pb(i);
+        }
+    }
 
-    rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
+    int low=rootSegMax;
+    int high=rootSegMax+low;
+    int tempMax=Prime.size();
+
+    while(Prime.size() < maxPrimes && low<segMax){
+        mem(neverMakeThisName,true);
+        rep(i,0,tempMax){
+            int st=Prime[i]*ceil(1.0*low/Prime[i]);
+            for(int j=st; j<high; j+=Prime[i]){
+                neverMakeThisName[j-low]=false;
+            }
+        }
+        rep(i,0,rootSegMax){
+            if(Prime.size() < maxPrimes && neverMakeThisName[i]){
+                Prime.pb(i+low);
+            }
+        }
+        low+=rootSegMax;
+        high+=rootSegMax;
+    }
 }
-//Sieve End
+//End Segmented Sieve of Eras^%&*sac
+
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -79,12 +108,13 @@ long long add(long long &x, long long y){
 }
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    int k; si(k);
+    pin(Prime[k-1]);
 }
 
 int main(){
     int t=1; si(t);
+    segmentedSieve();
     while(t--){
         solve();
     }

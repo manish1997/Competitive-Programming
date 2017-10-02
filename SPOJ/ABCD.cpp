@@ -10,10 +10,10 @@ using namespace std;
 #define ll long long
 #define si(n) scanf("%d",&n)
 #define si2(n1,n2) scanf("%d%d",&n1,&n2)
-#define si3(n1,n2,n3) scanf("%d%d%d",&n1,&n2,&n3)
+#define si3(n1,n2,n3) scanf("%d%d%d",&n,&n2,&n3)
 #define sll(n) scanf("%lld",&n)
 #define sll2(n1,n2) scanf("%lld%lld",&n1,&n2)
-#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n1,&n2,&n3)
+#define sll3(n1,n2,n3) scanf("%lld%lld%lld",&n,&n2,&n3)
 #define pin(n) printf("%d\n",n)
 #define mem(A,i) memset(A, i, sizeof(A))
 #define plln(n) printf("%lld\n",n)
@@ -21,31 +21,15 @@ using namespace std;
 #define plls(n) printf("%lld ",n)
 #define rep(i, start, end) for(int i=start; i<end; i++)
 #define repDown(i, start, end) for(ll i=start; i>=end; i--)
-#define P pair<ll,ll>
-#define PP pair<P,ll>
+#define P pair<int,int>
+#define PP pair<P,int>
 #define mod 1000000007
 #define MAX 100005
 #define s second
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10000001 //maximum for which u need primality test
 
-//Sieve Start
-vector<int> Prime;
-void sieve(){
-	bool neverMakeThisName[sieveMax];
-    neverMakeThisName[0]=neverMakeThisName[1]=true;
-    for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
-
-    for(int i=3; i<=sqrt(sieveMax); i+=2)
-        if(neverMakeThisName[i]==false) {
-            for(int j=i*i; j<sieveMax; j+=i) neverMakeThisName[j]=true;
-        }
-
-    rep(i,0,sieveMax) if(neverMakeThisName[i]==false) Prime.pb(i);
-}
-//Sieve End
 ll gcd ( ll  a, ll b ){
   if ( a==0 ) return b;
   return gcd ( b%a, a );
@@ -77,14 +61,47 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
-void solve(){
-    //solve the problem. You can and you will :) give your best shot..
+void reset(){
+    //check if your logic is correct but still wrong answer
 
-    
+}
+char s[100005];
+int n;
+P helper(int a, int b){
+    int arr[4]; mem(arr,0);
+    arr[a]=arr[b]=1;
+    P p={-1,-1};
+    rep(i,0,4) {
+        if(arr[i]) continue;
+        if(p.f==-1) p.f=i;
+        else p.s=i;
+    }
+    return p;
+}
+void solve(){
+    // reset();
+    //solve the problem. You can and you will :) give your best shot..
+    si(n);
+    scanf("%s",s);
+    int len=2*n;
+    char a,b='q';
+    for(int i=0; i<len; i+=2){
+        P temp=helper(s[i]-'A', s[i+1]-'A');
+        if(b!=(temp.f+'A')){
+            a='A'+temp.f;
+            b='A'+temp.s;
+        }
+        else{
+            a=temp.s+'A';
+            b=temp.f+'A';
+        }
+        printf("%c%c",a,b);
+    }
+
 }
 
 int main(){
-    int t=1; si(t);
+    int t=1;// si(t);
     while(t--){
         solve();
     }
