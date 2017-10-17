@@ -1,4 +1,5 @@
-// #include <bits/stdc++.h>
+//NOT CORRECT.. WORKING ON THIS
+//#include<bits/stdc++.h>
 #include <iostream>
 #include <cmath>
 #include <climits>
@@ -20,22 +21,21 @@ using namespace std;
 #define pis(n) printf("%d ",n)
 #define plls(n) printf("%lld ",n)
 #define rep(i, start, end) for(int i=start; i<end; i++)
-#define repDown(i, start, end) for(int i=start; i>=end; i--)
-#define P pair<int,int>
-#define PP pair<P,int>
+#define repDown(i, start, end) for(ll i=start; i>=end; i--)
+#define P pair<ll,ll>
+#define PP pair<P,ll>
 #define mod 1000000007
 #define MAX 100005
 #define s second
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10001 //maximum for which u need primality test
+#define sieveMax 10000001 //maximum for which u need primality test
 
 //Sieve Start
 vector<int> Prime;
 void sieve(){
     bool neverMakeThisName[sieveMax];
-    mem(neverMakeThisName,false);
     neverMakeThisName[0]=neverMakeThisName[1]=true;
     for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
 
@@ -78,15 +78,63 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+int n; 
+int B[55];
+ll ans=0;
+pair<ll,ll> dp[52][52][2501];
+void helper(){
 
+    for(int i=0; i<=B[1]; i++){
+        dp[1][i][i]={1,1};
+    }
+    for(int i=2; i<=n; i++){
+        for(int curr=0; curr<=B[i]; curr++){
+            for(int GCD=0; GCD<=50; GCD++){
+                for(int SUM=0; SUM<=2500; SUM++){
+
+                    if(dp[i-1][GCD][SUM].f || dp[i-1][GCD][SUM].s){
+
+                        if(GCD==0){
+                            dp[i][GCD][SUM]={1,1};
+                            if(i==n) add(ans,dp[i][GCD][SUM].f);
+                            continue;
+                        }
+
+                        int good=dp[i-1][GCD][SUM].f;
+                        int total=dp[i-1][GCD][SUM].s;
+
+                        int sum=SUM+curr;
+
+                        int gc=gcd(GCD,curr);
+
+                        int tm=sum/gc;
+                        if((tm&(tm-1))==0){
+                            add(dp[i][gc][sum].f,total);
+                            add(dp[i][gc][sum].s,total);
+                        }
+                        else{
+                            add(dp[i][gc][sum].s,total);
+                        }
+                        // if(i==n) add(ans,dp[i][gc][sum].f);
+                    }
+                }
+            }
+
+        }
+
+    }
+
+}
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    si(n);
+    rep(i,1,1+n) si(B[i]);
+    helper();
+    cout << ans << endl;
 }
 
 int main(){
-    int t=1; si(t);
+    int t=1; //si(t);
     while(t--){
         solve();
     }

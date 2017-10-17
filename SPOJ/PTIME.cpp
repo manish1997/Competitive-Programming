@@ -1,4 +1,4 @@
-// #include <bits/stdc++.h>
+//#include<bits/stdc++.h>
 #include <iostream>
 #include <cmath>
 #include <climits>
@@ -20,22 +20,21 @@ using namespace std;
 #define pis(n) printf("%d ",n)
 #define plls(n) printf("%lld ",n)
 #define rep(i, start, end) for(int i=start; i<end; i++)
-#define repDown(i, start, end) for(int i=start; i>=end; i--)
-#define P pair<int,int>
-#define PP pair<P,int>
+#define repDown(i, start, end) for(ll i=start; i>=end; i--)
+#define P pair<ll,ll>
+#define PP pair<P,ll>
 #define mod 1000000007
 #define MAX 100005
 #define s second
 #define f first
 #define newLine printf("\n")
 #define pb push_back
-#define sieveMax 10001 //maximum for which u need primality test
+#define sieveMax 10011 //maximum for which u need primality test
 
 //Sieve Start
 vector<int> Prime;
+bool neverMakeThisName[sieveMax];
 void sieve(){
-    bool neverMakeThisName[sieveMax];
-    mem(neverMakeThisName,false);
     neverMakeThisName[0]=neverMakeThisName[1]=true;
     for(int i=4; i<sieveMax; i+=2) neverMakeThisName[i]=true;
 
@@ -78,17 +77,36 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
-
+int power[10011];
+int n;
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    mem(power,0);
+    rep(i,2,n+1){
+        int temp=i;
+        int j=0;
+        while(temp>1 && j<Prime.size()){
+            if(temp%Prime[j]==0){
+                temp/=Prime[j];
+                power[Prime[j]]++;
+            }
+            else j++;
+        }
+    }
+    string ans="";
+    rep(i,2,n+1){
+        if(power[i]){
+            ans+=to_string(i)+"^"+to_string(power[i])+" * ";
+        }
+    }
+    ans.pop_back();
+    ans.pop_back();
+    ans.pop_back();
+    cout << ans << endl;
 }
 
 int main(){
-    int t=1; si(t);
-    while(t--){
-        solve();
-    }
+    sieve();
+    while(si(n)!=EOF) solve();
     return 0;
 }
