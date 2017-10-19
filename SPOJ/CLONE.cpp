@@ -1,12 +1,10 @@
-//MANISH KUMAR
-//IIT ROORKEE E&C
 // #include <bits/stdc++.h>
 #include <iostream>
 #include <cmath>
 #include <climits>
 #include <cstring>
 #include <vector>
-#include <map>
+#include <unordered_map>
 using namespace std;
 #define pi 3.1415926535897
 #define ll long long
@@ -56,9 +54,9 @@ ll gcd ( ll  a, ll b ){
 string inputString(){
     string i="";
     int temp=getchar();
-    while(temp<'a'||temp>'z')
+    while(temp<'A'||temp>'Z')
         temp=getchar();
-    while(temp>='a'&&temp<='z')
+    while(temp>='A'&&temp<='Z')
     {
         i+=(char)temp;
         temp=getchar();
@@ -80,16 +78,28 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
-
+int n,m; 
+unordered_map<string,int> mapp;
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
+    mapp.clear();
+    rep(i,0,n){
+        string s=inputString();
+        mapp[s]++;
+    }
+    int ans[20002];
+    mem(ans,0);
+    for(auto it=mapp.begin(); it!=mapp.end(); it++){
+        ans[it->second]++;
+    }
+    rep(i,1,n+1) pin(ans[i]);
     
 }
 
 int main(){
-    int t=1; si(t);
-    while(t--){
+    while(true){
+        si2(n,m);
+        if(n==0 && m==0) break;
         solve();
     }
     return 0;

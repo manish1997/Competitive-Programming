@@ -1,5 +1,3 @@
-//MANISH KUMAR
-//IIT ROORKEE E&C
 // #include <bits/stdc++.h>
 #include <iostream>
 #include <cmath>
@@ -80,17 +78,56 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
-
+string s[3];
+bool check(char C){
+    string toch; rep(i,0,3) toch.pb(C);
+    rep(i,0,3) if(s[0]==toch) return true;
+    rep(i,0,3){
+        string tem="";
+        rep(j,0,3) tem.pb(s[j][i]);
+        if(tem==toch) return true;
+    }
+    string temp="";
+    rep(i,0,3) temp.pb(s[i][i]);
+    if(temp==toch) return true;
+    temp.clear();
+    rep(i,0,3) temp.pb(s[i][2-i]);
+    if(temp==toch) return true;
+    return false;
+}
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
+    rep(i,0,3) cin >> s[i];
+    int o=0,x=0;
+    rep(i,0,3){
+        rep(j,0,s[i].length()) if(s[i][j]=='X') x++;
+        else if(s[i][j]=='O') o++;
+    }
+    if(x==o+1){
+        //O shouldn;t be in the winning position
+        if(check('O')) printf("no\n");
+        else printf("yes\n");
 
-    
+    }
+    else if(x==o){
+        //X shouldn't be in winning position
+        if(check('X')) printf("no\n");
+        else printf("yes\n");
+    }
+    else{
+        printf("no\n");
+    }
 }
 
 int main(){
     int t=1; si(t);
+    int a[9];
+    char dummy;
+
     while(t--){
         solve();
+        if(t!=0)
+        scanf("%c",&dummy);
     }
     return 0;
 }

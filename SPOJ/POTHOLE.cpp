@@ -1,12 +1,10 @@
-//MANISH KUMAR
-//IIT ROORKEE E&C
 // #include <bits/stdc++.h>
 #include <iostream>
 #include <cmath>
 #include <climits>
 #include <cstring>
 #include <vector>
-#include <map>
+#include <queue>
 using namespace std;
 #define pi 3.1415926535897
 #define ll long long
@@ -31,6 +29,7 @@ using namespace std;
 #define f first
 #define newLine printf("\n")
 #define pb push_back
+#define INF 1e7
 #define sieveMax 10001 //maximum for which u need primality test
 
 //Sieve Start
@@ -80,11 +79,76 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+int arr[205][205];
+int n,m; 
+int from[205];
+bool visited[205];
+int find_aug_path(){
+    queue<int> Q;
+    Q.push(1);
+    int sink=n;
+    memset(from, -1, sizeof(from));
+    memset(visited, false, sizeof(visited));
+    visited[1]=true;
+    bool whileBreak =false;
+    while(!Q.empty() && !whileBreak){
+        int cur=Q.front();
+        Q.pop();
+        for(int i=1; i<=n; i++){
+            int next=i;
+            if(!visited[next] && arr[cur][next]>0){
+                visited[next]=true;
+                Q.push(next);
+                from[next]=cur;
+                if(next==sink) {
+                    whileBreak=true;
+                    break;
+                }
+            }
+            
+        }
+    }
+    if(from[sink]==-1) return 0;
+    int prev;
+    int curr=sink;
+    int capacity=1;
+    curr=sink;
+    while(true){
+        prev=from[curr];
+        if(prev==-1) break;
+        arr[prev][curr]-=1;
+        arr[curr][prev]+=1;
+        curr=prev;
+    };
+    return (capacity==INT_MAX)?0:capacity;
+}
+
+
+int maxFlow(){
+    int result=0;
+    while(true){
+        int path=find_aug_path();
+        if(path==0) break;
+        result+=path;
+    }
+    return result;
+}
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
-    
+    si(n);
+    mem(arr,0);
+    int m,node;
+    rep(i,1,n){
+        si(m);
+        rep(j,0,m){
+            si(node);
+            if(i==1) arr[i][node]=1;
+            else if(node==n) arr[i][node]=1;
+            else arr[i][node]=20000;
+        }
+    }
+    pin(maxFlow());
 }
 
 int main(){

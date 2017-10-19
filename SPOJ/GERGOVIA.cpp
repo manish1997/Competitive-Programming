@@ -1,5 +1,3 @@
-//MANISH KUMAR
-//IIT ROORKEE E&C
 // #include <bits/stdc++.h>
 #include <iostream>
 #include <cmath>
@@ -21,7 +19,7 @@ using namespace std;
 #define plln(n) printf("%lld\n",n)
 #define pis(n) printf("%d ",n)
 #define plls(n) printf("%lld ",n)
-#define rep(i, start, end) for(int i=start; i<end; i++)
+#define rep(i, start, end) for(ll i=start; i<end; i++)
 #define repDown(i, start, end) for(int i=start; i>=end; i--)
 #define P pair<int,int>
 #define PP pair<P,int>
@@ -80,16 +78,67 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+int n;
+ll arr[100002];
+ll ptr1,ptr2;
+ll ans;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
 
-    
+    rep(i,1,n+1) sll(arr[i]);
+    ans=0;
+    ptr1=ptr2=0;
+    rep(i,1,n+1){
+        ptr1=max(ptr1,i);
+        ptr2=max(ptr2,i);
+        if(arr[i]>0){
+            while(ptr1<=n){
+                if(arr[ptr1]>0) {
+                    ptr1++;
+                    continue;
+                }
+                if(-1*arr[ptr1]>arr[i]){
+                    arr[ptr1]+=arr[i];
+                    ans+=(arr[i]*(ptr1-i));
+                    break;
+                }
+                else{
+                    ans+=(-1*arr[ptr1]*(ptr1-i));
+                    arr[i]+=arr[ptr1];
+                    arr[ptr1]=0;
+                }
+                ptr1++;
+            }
+        }
+        else if(arr[i]<0){
+            if(ptr1>i) continue;
+            while(ptr2<=n){
+                if(arr[ptr2]<0){
+                    ptr2++;
+                    continue;
+                }
+                if(arr[ptr2]>(-1*arr[i])){
+                    arr[ptr2]+=arr[i];
+                    ans+=(-1*arr[i]*(ptr2-i));
+                    break;
+                }
+                else{
+                    ans+=(arr[ptr2]*(ptr2-i));
+                    arr[i]+=arr[ptr2];
+                    arr[ptr2]=0;
+                }
+                ptr2++;
+            }
+        }
+    }
+    plln(ans);
 }
 
 int main(){
-    int t=1; si(t);
-    while(t--){
+    while(true){
+        si(n);
+        if(n==0)break;
         solve();
     }
     return 0;

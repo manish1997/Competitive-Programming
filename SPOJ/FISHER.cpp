@@ -1,4 +1,3 @@
-//Can be done by dijkstra.. implement it..
 //#include<bits/stdc++.h>
 #include <iostream>
 #include <cmath>
@@ -50,11 +49,11 @@ string inputString(){
 }
 
 ll expo(ll x, ll n, ll m){
-	if(n==0) return 1;
-	ll temp=expo(x,n/2,m);
-	temp = ((temp%m)*(temp%m))%m;
-	if(n%2!=0) temp = ((temp%m)*(x%m))%m;
-	return temp;
+    if(n==0) return 1;
+    ll temp=expo(x,n/2,m);
+    temp = ((temp%m)*(temp%m))%m;
+    if(n%2!=0) temp = ((temp%m)*(x%m))%m;
+    return temp;
 }
 
 long long add(long long &x, long long y){
@@ -74,7 +73,6 @@ void reset(){
     //check if your logic is correct but still wrong answer
     rep(i,0,51) rep(j,0,1002) dp[i][j]={-1,-1}; 
     mem(visited,false);
-
 }
 P helper(int start, int rem){
     if(rem<0) return {INF,INF};
@@ -90,28 +88,26 @@ P helper(int start, int rem){
                 ans.f=temp.f+toll[start][i];
                 ans.s=temp.s+t2[start][i];
             }
-            else if(temp.f+toll[start][i]==ans.f){
-                if(temp.s+t2[start][i]<ans.s){
-                    ans.s=temp.s+t2[start][i];
-                }
-            }
+            // else if(temp.f+toll[start][i]==ans.f){
+            //     if(temp.s+t2[start][i]<ans.s){
+            //         ans.s=temp.s+t2[start][i];
+            //     }
+            // }
         }
     }
     visited[start]=false;
     return ans;
 }
-
 void solve(){
     reset();
     //solve the problem. You can and you will :) give your best shot..
     rep(i,0,n)rep(j,0,n)si(t2[i][j]);
     rep(i,0,n)rep(j,0,n)si(toll[i][j]);
     pis(helper(0,t).f); pin(helper(0,t).s);
-    si2(n,t);
 }
-
 int main(){
     while(si2(n,t)!=EOF){
+        if(n==0 && t==0) break;
         solve();
     }
     return 0;
