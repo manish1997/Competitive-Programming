@@ -1,7 +1,10 @@
-2
-29
-541
-7919
-104729
-1299709
-86028121
+Case 1, N = 1, # of different labelings = 1
+Case 2, N = 2, # of different labelings = 1
+Case 3, N = 3, # of different labelings = 3
+Case 4, N = 4, # of different labelings = 16
+Case 5, N = 5, # of different labelings = 125
+Case 6, N = 6, # of different labelings = 1296
+Case 7, N = 7, # of different labelings = 16807
+Case 8, N = 8, # of different labelings = 262144
+Case 9, N = 9, # of different labelings = 4782969
+Case 10, N = 10, # of different labelings = 100000000
