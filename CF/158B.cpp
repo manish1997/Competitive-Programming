@@ -78,15 +78,35 @@ long long add(long long &x, long long y){
         if(x<0) x+=mod;
         return x;
 }
+int arr[5];
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
+    int n; si(n);
+    rep(i,1,n+1){
+        int x; si(x);
+        arr[x]++;
+    }
+    int ans=0;
+    ans+=arr[4];
+    arr[1]=arr[1]-min(arr[1],arr[3]);
+    ans+=arr[3];
+    ans+=(arr[1]/4);
+    arr[1]%=4;
+    if(arr[1]<=2 && arr[1]>=1){
+        arr[2]++;
+    }
+    else if(arr[1]==3){
+        ans+=1;
+    }
+    ans+=(arr[2]/2);
+    ans+=(arr[2]%2);
+    pin(ans);
     
 }
 
 int main(){
-    int t=1; si(t);
+    int t=1; //si(t);
     while(t--){
         solve();
     }

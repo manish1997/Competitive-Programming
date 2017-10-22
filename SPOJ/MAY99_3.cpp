@@ -81,7 +81,10 @@ long long add(long long &x, long long y){
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-
+    int x,y,z;
+    si3(x,y,z);
+    if(z>max(x,y) || z%gcd(x,y)!=0) printf("NO\n");
+    else printf("YES\n");
     
 }
 
