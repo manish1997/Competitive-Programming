@@ -17,21 +17,6 @@ using namespace std;
 #define f first
 #define pb push_back
 
-
-
-ll gcd ( ll  a, ll b ){
-  if ( a==0 ) return b;
-  return gcd ( b%a, a );
-}
-
-ll expo(ll x, ll n, ll m){
-    if(n==0) return 1;
-    ll temp=expo(x,n/2,m);
-    temp = ((temp%m)*(temp%m))%m;
-    if(n%2!=0) temp = ((temp%m)*(x%m))%m;
-    return temp;
-}
-
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
 
