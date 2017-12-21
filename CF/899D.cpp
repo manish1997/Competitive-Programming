@@ -1,45 +1,36 @@
-//TODO
 #include <bits/stdc++.h>
 using namespace std;
 #define pi 3.1415926535897
 #define ll long long
-#define si(n) scanf("%d",&n)
-#define si2(n1,n2) scanf("%d%d",&n1,&n2)
-#define sll(n) scanf("%lld",&n)
-#define sll2(n1,n2) scanf("%lld%lld",&n1,&n2)
-#define tr1(n) printf("%d\n",n)
-#define tr2(n1,n2) printf("%d%d\n",n1,n2)
+#define tr1(n) cout << n << endl
+#define tr2(n1,n2) cout << n1 << " " << n2 << endl
 #define mem(A,i) memset(A, i, sizeof(A))
 #define rep(i, start, end) for(int i=start; i<end; i++)
 #define repDown(i, start, end) for(int i=start; i>=end; i--)
 #define mod 1000000007
-#define MAX 100005
+#define MAX 1000005
 #define s second
 #define f first
 #define pb push_back
-
+#define fast_in std::ios::sync_with_stdio(false);
+#define fast_cin fast_in; ios_base::sync_with_stdio(false); cin.tie(NULL);
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-	int n; cin >> n;
-	repDown(i,8,0){
-		int maxx=5*pow(10,i);
-		if(n>=maxx){
-			cout << i << endl;
-			int add=1;
-			if(n>=pow(10,i+1)-1) add=0;
-			cout <<(n-maxx+add)<<endl;
-			return;
-		}
-	}
-	cout<<((n*(n-1))/2);
-    return;
+
+    
 }
 
 int main(){
+	fast_cin;
+	clock_t clk;
+	clk = clock();
+	srand (time(NULL));
     int t=1; 
-    //si(t);
+    cin >> t;
     while(t--){
         solve();
     }
+    clk = clock() - clk;	
+	cerr << fixed << setprecision(6) << "Time: " << ((double)clk)/CLOCKS_PER_SEC << "\n";
     return 0;
 }
