@@ -1,4 +1,12 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+#include <unordered_map>
+#include <ctime>
+
+
+
 using namespace std;
 #define pi 3.1415926535897
 #define ll long long
@@ -100,6 +108,6 @@ int main(){
         solve();
     }
     clk = clock() - clk;	
-	cerr << fixed << setprecision(6) << "Time: " << ((double)clk)/CLOCKS_PER_SEC << "\n";
+	// cerr << fixed << setprecision(6) << "Time: " << ((double)clk)/CLOCKS_PER_SEC << "\n";
     return 0;
 }

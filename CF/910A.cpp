@@ -14,10 +14,27 @@ using namespace std;
 #define pb push_back
 #define fast_in std::ios::sync_with_stdio(false);
 #define fast_cin fast_in; ios_base::sync_with_stdio(false); cin.tie(NULL);
-
+#define inf 1e8
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
+    int n,d;
+    string s;
+    cin >> n >> d;
+    cin >> s;
+    int dp[s.length()];
+    rep(i,0,s.length()) dp[i]=inf;
 
+    dp[s.length()-1]=0;
+    repDown(i,n-2,0){
+        if(s[i]=='0') continue;
+        rep(j,i+1,i+d+1){
+            if(j>=n) break;
+            if(s[j]=='0') continue;
+            dp[i]=min(dp[i], dp[j]+1);
+        }
+    }
+    if(dp[0]==inf) tr1(-1);
+    else tr1(dp[0]);
     
 }
 
