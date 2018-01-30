@@ -17,13 +17,41 @@ using namespace std;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    
+    int n;cin >> n;
+    if(n==0){
+        cout <<"Draw" <<endl;
+        return;
+    }
+    unordered_map<string,int> M;
+
+    rep(i,0,n){
+        string s; cin >> s;
+        M[s]++;
+    }
+    if(M.size()==1){
+        cout << M.begin()->first <<endl;
+        return;
+    }
+    string a=M.begin()->first;
+    int acnt=M.begin()->second;
+    M.erase(M.begin());
+    string b=M.begin()->first;
+    int bcnt=M.begin()->s;
+    if(acnt>bcnt){
+        cout << a << endl;
+    }
+    else if(bcnt>acnt){
+        cout << b << endl;
+    }
+    else {
+        cout << "Draw" << endl;
+    }
 }
 
 int main(){
     fast_cin;
     int t=1; 
-    // cin >> t;
+    cin >> t;
     while(t--){
         solve();
     }

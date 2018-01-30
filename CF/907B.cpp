@@ -97,7 +97,7 @@ int main(){
     while(t--){
         solve();
     }
- //    clk = clock() - clk;	
+    //clk = clock() - clk;	
 	// cerr << fixed << setprecision(6) << "Time: " << ((double)clk)/CLOCKS_PER_SEC << "\n";
     return 0;
 }

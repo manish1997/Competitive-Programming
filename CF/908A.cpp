@@ -17,15 +17,28 @@ using namespace std;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
+    string s;
+    cin>> s;
+    string temp="aeiou13579";
+    unordered_map<char,bool> M;
+    rep(i,0,temp.length())M[temp[i]]=true;
+    int ans=0;
+    rep(i,0,s.length())if(M.find(s[i])!=M.end())ans++;
+    tr1(ans);
     
 }
 
 int main(){
     fast_cin;
+	//clock_t clk;
+	//clk = clock();
+	//srand (time(NULL));
     int t=1; 
     // cin >> t;
     while(t--){
         solve();
     }
+    //clk = clock() - clk;	
+	//cerr << fixed << setprecision(6) << "Time: " << ((double)clk)/CLOCKS_PER_SEC << "\n";
     return 0;
 }

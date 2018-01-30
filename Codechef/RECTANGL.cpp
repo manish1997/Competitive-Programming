@@ -17,15 +17,38 @@ using namespace std;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
+    map<int,int> M;
+    rep(i,0,4){
+        int x;cin>>x;
+        M[x]++;
+    }
+    if(M.size()>2){
+        cout<<"NO" <<endl;
+        return;
+    }
+    if(M.size()==1){
+        cout <<"YES" <<endl;
+        return;
+    }
+    if(M.size()==2){
+        if(M.begin()->s==2) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+
     
 }
 
 int main(){
     fast_cin;
+	//clock_t clk;
+	//clk = clock();
+	//srand (time(NULL));
     int t=1; 
-    // cin >> t;
+    cin >> t;
     while(t--){
         solve();
     }
+    //clk = clock() - clk;	
+	//cerr << fixed << setprecision(6) << "Time: " << ((double)clk)/CLOCKS_PER_SEC << "\n";
     return 0;
 }
