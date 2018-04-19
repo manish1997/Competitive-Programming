@@ -15,47 +15,54 @@ using namespace std;
 #define fast_in std::ios::sync_with_stdio(false);
 #define fast_cin fast_in; ios_base::sync_with_stdio(false); cin.tie(NULL);
 
+ll V[35];
+string s;
+ll check(){
+	ll ans=0;
+	rep(i,0,s.length()) ans+=V[i];
+	return ans;
+}
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    int n,k,m;
-    cin>>n>>k>>m;
-    vector<pair<string,int> > curr(n);
-    rep(i,0,n){
-    	cin>>curr[i].f;
+    ll d;
+    cin>>d;
+    cin>>s;
+    mem(V,0);
+    ll curr=1LL;
+    rep(i,0,s.length()){
+    	if(s[i]=='C') curr*=2LL;
+    	else V[i]=curr;
     }
-    rep(i,0,n){
-    	cin>>curr[i].s;
-    }
-    vector<ll> minn(k);
-    map<string,int> M;
-    rep(i,0,k){
-    	int x;
-    	int anss=1e9+1;
-
-    	cin>>x;
-    	rep(j,0,x){
-    		int idx;cin>>idx;
-    		idx--;
-    		M[curr[idx].f]=i;
-    		anss=min(anss, curr[idx].s);
-    	}
-    	minn[i]=anss;
-    }
+    
     ll ans=0;
-    rep(i,0,m){
-    	string a;cin>>a;
-    	int grp=M[a];
-    	ans+=(ll)minn[grp];
+    while(true && check()>d){
+    	bool swapped=false;
+    	repDown(i,s.length()-2,0){
+    		if(V[i]==0 && V[i+1]!=0){
+    			swap(V[i],V[i+1]);
+    			V[i]/=2;
+    			swapped=true;
+    			ans++;
+    			break;
+    		}
+    	}
+    	if(!swapped) break;
+    	
     }
-    cout<<ans<<endl;
+    if(check()<=d) cout<<ans<<endl;
+    else cout <<"IMPOSSIBLE"<<endl;
+    
 }
 
 int main(){
     fast_cin;
     int t=1; 
-    // cin >> t;
+    cin >> t;
+    int t2=1;
     while(t--){
-        solve();
+    	cout<<"Case #"<<t2<<": ";
+	solve();
+	t2++;
     }
     return 0;
 }

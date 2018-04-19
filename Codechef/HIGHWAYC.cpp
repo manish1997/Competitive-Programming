@@ -8,54 +8,62 @@ using namespace std;
 #define rep(i, start, end) for(int i=start; i<end; i++)
 #define repDown(i, start, end) for(int i=start; i>=end; i--)
 #define mod 1000000007
-#define MAX 1000005
+#define MAX 100005
 #define s second
 #define f first
 #define pb push_back
 #define fast_in std::ios::sync_with_stdio(false);
 #define fast_cin fast_in; ios_base::sync_with_stdio(false); cin.tie(NULL);
-
+double S,Y;
+int n;
+double V[11];
+int D[11];
+double P[11];
+double C[11];
+ 
+ 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    int n,k,m;
-    cin>>n>>k>>m;
-    vector<pair<string,int> > curr(n);
+    cin>>n>>S>>Y;
+    rep(i,0,n) cin>>V[i];
+    rep(i,0,n) cin>>D[i];
+    rep(i,0,n) cin>>P[i];
+    rep(i,0,n) cin>>C[i];
+    double ans=0;
     rep(i,0,n){
-    	cin>>curr[i].f;
-    }
-    rep(i,0,n){
-    	cin>>curr[i].s;
-    }
-    vector<ll> minn(k);
-    map<string,int> M;
-    rep(i,0,k){
-    	int x;
-    	int anss=1e9+1;
-
-    	cin>>x;
-    	rep(j,0,x){
-    		int idx;cin>>idx;
-    		idx--;
-    		M[curr[idx].f]=i;
-    		anss=min(anss, curr[idx].s);
+    	//chef has to cross ith lane now.
+    	//find when ith car will come at x=0
+    	double acar,dcar;
+    	if(D[i]==1){
+    		if(P[i]<=C[i]) {
+    			acar=-P[i]/V[i];
+    			if(acar<=0) acar=0;
+    		}
+    		else acar=1e12;
+    		if(P[i]-C[i]<=0){
+    			dcar=(C[i]-P[i])/V[i];
+    		}
+    		else{
+    			dcar=1e12;
+    		}
+ 
     	}
-    	minn[i]=anss;
+    	else{
+ 
+    	}
     }
-    ll ans=0;
-    rep(i,0,m){
-    	string a;cin>>a;
-    	int grp=M[a];
-    	ans+=(ll)minn[grp];
-    }
-    cout<<ans<<endl;
+ 
+ 
+ 
+ 
 }
-
+ 
 int main(){
     fast_cin;
     int t=1; 
-    // cin >> t;
+    cin >> t;
     while(t--){
-        solve();
+	solve();
     }
     return 0;
 }

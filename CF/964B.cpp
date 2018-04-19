@@ -5,7 +5,7 @@ using namespace std;
 #define tr1(n) cout << n << endl
 #define tr2(n1,n2) cout << n1 << " " << n2 << endl
 #define mem(A,i) memset(A, i, sizeof(A))
-#define rep(i, start, end) for(int i=start; i<end; i++)
+#define rep(i, start, end) for(ll i=start; i<end; i++)
 #define repDown(i, start, end) for(int i=start; i>=end; i--)
 #define mod 1000000007
 #define MAX 1000005
@@ -17,35 +17,25 @@ using namespace std;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    int n,k,m;
-    cin>>n>>k>>m;
-    vector<pair<string,int> > curr(n);
-    rep(i,0,n){
-    	cin>>curr[i].f;
-    }
-    rep(i,0,n){
-    	cin>>curr[i].s;
-    }
-    vector<ll> minn(k);
-    map<string,int> M;
-    rep(i,0,k){
-    	int x;
-    	int anss=1e9+1;
-
-    	cin>>x;
-    	rep(j,0,x){
-    		int idx;cin>>idx;
-    		idx--;
-    		M[curr[idx].f]=i;
-    		anss=min(anss, curr[idx].s);
-    	}
-    	minn[i]=anss;
-    }
+    ll A,B,C,T;
+    ll n;cin>>n;
+    cin>>A>>B>>C>>T;
+    // int arr[T];
+    // mem(arr,0);
     ll ans=0;
-    rep(i,0,m){
-    	string a;cin>>a;
-    	int grp=M[a];
-    	ans+=(ll)minn[grp];
+
+    rep(i,0,n){
+    	ll ti;cin>>ti;
+    	//received at ti;
+    	ll temp=0;
+    	rep(j,ti,T+1){
+    		//if he receieves it at t=j, what will he get
+    		ll curr=(j-ti)*C;
+    		//already received
+    		curr+=(A-B*(j-ti));
+    		temp=max(temp, curr);
+    	}
+    	ans+=temp;
     }
     cout<<ans<<endl;
 }

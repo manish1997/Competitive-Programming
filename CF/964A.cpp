@@ -17,37 +17,9 @@ using namespace std;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    int n,k,m;
-    cin>>n>>k>>m;
-    vector<pair<string,int> > curr(n);
-    rep(i,0,n){
-    	cin>>curr[i].f;
-    }
-    rep(i,0,n){
-    	cin>>curr[i].s;
-    }
-    vector<ll> minn(k);
-    map<string,int> M;
-    rep(i,0,k){
-    	int x;
-    	int anss=1e9+1;
-
-    	cin>>x;
-    	rep(j,0,x){
-    		int idx;cin>>idx;
-    		idx--;
-    		M[curr[idx].f]=i;
-    		anss=min(anss, curr[idx].s);
-    	}
-    	minn[i]=anss;
-    }
-    ll ans=0;
-    rep(i,0,m){
-    	string a;cin>>a;
-    	int grp=M[a];
-    	ans+=(ll)minn[grp];
-    }
-    cout<<ans<<endl;
+    ll n;cin>>n;
+    n/=2;
+    cout<<n+1<<endl;
 }
 
 int main(){

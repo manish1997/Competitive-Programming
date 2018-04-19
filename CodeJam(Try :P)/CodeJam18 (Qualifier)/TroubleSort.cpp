@@ -8,54 +8,59 @@ using namespace std;
 #define rep(i, start, end) for(int i=start; i<end; i++)
 #define repDown(i, start, end) for(int i=start; i>=end; i--)
 #define mod 1000000007
-#define MAX 1000005
+#define MAX 100005
 #define s second
 #define f first
 #define pb push_back
 #define fast_in std::ios::sync_with_stdio(false);
 #define fast_cin fast_in; ios_base::sync_with_stdio(false); cin.tie(NULL);
 
+vector<int> A;
+vector<int> B;
+int arr[MAX];
+
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    int n,k,m;
-    cin>>n>>k>>m;
-    vector<pair<string,int> > curr(n);
+    A.clear();
+    B.clear();
+    int n;cin>>n;
     rep(i,0,n){
-    	cin>>curr[i].f;
+    	int x;cin>>x;
+    	if(i%2) B.pb(x);
+    	else A.pb(x);
     }
+    sort(A.begin(), A.end());
+    sort(B.begin(), B.end());
+    
+    int currA=0,currB=0;
     rep(i,0,n){
-    	cin>>curr[i].s;
-    }
-    vector<ll> minn(k);
-    map<string,int> M;
-    rep(i,0,k){
-    	int x;
-    	int anss=1e9+1;
-
-    	cin>>x;
-    	rep(j,0,x){
-    		int idx;cin>>idx;
-    		idx--;
-    		M[curr[idx].f]=i;
-    		anss=min(anss, curr[idx].s);
+    	if(i%2){
+    		arr[i]=B[currB++];
     	}
-    	minn[i]=anss;
+    	else{
+    		arr[i]=A[currA++];
+    	}
     }
-    ll ans=0;
-    rep(i,0,m){
-    	string a;cin>>a;
-    	int grp=M[a];
-    	ans+=(ll)minn[grp];
+    rep(i,0,n-1){
+    	if(arr[i]>arr[i+1]) {
+    		cout << i << endl;
+    		return;
+    	}
     }
-    cout<<ans<<endl;
+    cout<<"OK"<<endl;
+    return;
+    
 }
-
+ 
 int main(){
     fast_cin;
     int t=1; 
-    // cin >> t;
+    cin >> t;
+    int t2=1;
     while(t--){
-        solve();
+    	cout<<"Case #"<<t2<<": ";
+	solve();
+	t2++;
     }
     return 0;
 }
