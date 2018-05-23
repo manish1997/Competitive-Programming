@@ -8,8 +8,7 @@ using namespace std;
 #define rep(i, start, end) for(int i=start; i<end; i++)
 #define repDown(i, start, end) for(int i=start; i>=end; i--)
 #define mod 1000000007
-#define MAX 100005
-#define INF 1+1e18
+#define MAX 1000005
 #define s second
 #define f first
 #define pb push_back
@@ -18,7 +17,29 @@ using namespace std;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    
+    string s;
+    int n;cin>>n;
+    cin>>s;
+    // int n=s.length();
+    bool possible=false;
+    bool neg=false;
+    rep(i,0,s.length()){
+    	if(s[i]=='0'){
+    		if((i-1<0 || s[i-1]=='0') && (i+1>=n || s[i+1]=='0')){
+    			possible=true;
+    			break;
+    		}
+    	}
+    	else{
+    		if(i-1>=0 && s[i-1]=='1') neg=true;
+    		if(i+1<n && s[i+1]=='1') neg=true;
+    		if(neg) break;
+    	}
+    }
+    if(neg|| possible){
+    	cout <<"NO";
+    }
+    else cout << "YES";
 }
 
 int main(){
