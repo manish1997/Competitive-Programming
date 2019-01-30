@@ -5,6 +5,17 @@ ll gcd(ll a, ll b){
 }
 //end GCD
 
+//nCr
+ll nCr(ll n, ll r){
+    ll ans=1;
+    for(ll i=1; i<=r; i++){
+        ans=(ans*(n-r+i));
+        ans=(ans/i);
+    }
+    return ans;
+}
+//end nCr
+
 //Modulus Expo
 ll expo(ll x, ll n, ll m){
     if(n==0) return 1;
