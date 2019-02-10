@@ -21,11 +21,9 @@ ll gcd(ll a, ll b){
     return gcd ( b%a, a );
 }
 //end GCD
-void solve(ll a){
+void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    // ll a;cin>>a;
-
-
+    ll a;cin>>a;
     a++;
     if(a&(a-1)){
     	a--;
@@ -44,44 +42,15 @@ void solve(ll a){
     	}
     }
     cout << gcd(ans^a, ans&a) << endl;
-    // cout << a << " " << ans << endl;
-    // ll curr=0;
-
-    // for(int b=1; b<a; b++){
-    // 	if(gcd(a&b, a^b)>curr){
-    // 		curr=gcd(a&b,a^b);
-    // 		ans=b;
-    // 	}
-    // }
-    // if(ans!=(pow(2,(int)log2(a))-(a-pow(2,(int)log2(a))-1)));
-    // if((pow(2,(int)log2(a))-(a-pow(2,(int)log2(a))+1))!=ans){
-    // 	cout << a << " " << ans << " " << curr << endl;
-    // }
-    // cout << ans << " " << a << " " << (pow(2,(int)log2(a))-(a-pow(2,(int)log2(a))+1)) << endl;
 
 }
 
 int main(){
     fast_cin;
-    // cin>>t;
-
-    ll a=1024-1;
-    // cout << a << endl;
-
-    // solve(a);
-
-    ll t= a-5;
-    while(a>1){
-    	cout << a << " " ;
-    
-    	solve(a);
-    	a--;
+    int t = 1;
+    cin>>t;
+    while(t--){
+        solve();
     }
-    // rep(i,1,4098){
-    // 	solve(i);
-    // }
-    // while(t--){
-    //     solve();
-    // }
     return 0;
 }
