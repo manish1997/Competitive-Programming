@@ -88,12 +88,8 @@ void solve(){
     		}
     	}
     	ans+=destt;
-    	cout << ans << " ";
-    	
+    	cout << ans << " ";	
     }
-
-
-    
 }
 
 int main(){

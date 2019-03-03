@@ -9,6 +9,7 @@ void buildFailure(string s){
     //which is also a suffix when we
     //have processed till start
     int start=1;
+    int n=s.length();
     while(start<n){
         if(s[start]==s[len]){
             failure[start]=len+1;
