@@ -18,17 +18,39 @@ using namespace std;
 
 void solve(){
     //solve the problem. You can and you will :) give your best shot..
-    int n,k;
-    cin>>n>>k;
-    if(k==1 || k==n){
-    	cout << 3*n << endl;
-    	return;
+    int n,m;
+    cin>>n>>m;
+    int diag = n+m-1;
+    vector<vector<int> > diag1(n+m-1, vector<int>());
+    vector<vector<int> > diag2(n+m-1, vector<int>());
+
+    rep(i,0,n){
+        rep(j,0,m){
+            int x;cin>>x;
+            diag1[i+j].pb(x);
+        }
     }
-    int distleft = k-1;
-    int distright = n-k;
-    int tempf = 3*(distleft+1) + distleft + 3*distright;
-    int temps = 3*(distright+1) + distright + 3*distleft;
-    cout << min(temps, tempf) << endl;
+
+    rep(i,0,n){
+        rep(j,0,m){
+            int x;cin>>x;
+            diag2[i+j].pb(x);
+        }
+    }
+
+    rep(i,0,n+m-1){
+        sort(diag1[i].begin(),diag1[i].end());
+        sort(diag2[i].begin(),diag2[i].end());
+    }
+
+    rep(i,0,n+m-1){
+        if(diag1[i]!=diag2[i]){
+            cout <<"NO";
+            return;
+        }
+    }
+    
+    cout<<"YES";
 }
 
 int main(){
