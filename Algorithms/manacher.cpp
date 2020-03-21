@@ -1,3 +1,4 @@
+//  Credits is all of : https://cp-algorithms.com/string/manacher.html . Awesome editorial.
 class manacher{
 	public:
 	// Vector where d1[i] = (number of palindrome with odd length (centre is i)).
